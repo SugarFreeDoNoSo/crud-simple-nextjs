@@ -19,8 +19,10 @@ export async function GET(request: NextRequest, { params }: Params) {
         }
 
         return NextResponse.json(objeto, { status: 200 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
     }
 }
 
@@ -40,8 +42,11 @@ export async function PUT(request: NextRequest, { params }: Params) {
         });
 
         return NextResponse.json(objetoActualizado, { status: 200 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
+
     }
 }
 
@@ -54,7 +59,9 @@ export async function DELETE(request: NextRequest, { params }: Params) {
         });
 
         return new NextResponse(null, { status: 204 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
     }
 }

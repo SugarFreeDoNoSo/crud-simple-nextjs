@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
-export async function GET(request: NextRequest) {
+
+export async function GET() {
     try {
         const objetos = await prisma.objeto.findMany();
         return NextResponse.json(objetos, { status: 200 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
     }
 }
 
@@ -24,7 +27,10 @@ export async function POST(request: NextRequest) {
         });
 
         return NextResponse.json(nuevoObjeto, { status: 201 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error) {
+
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
     }
 }
