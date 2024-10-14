@@ -9,6 +9,7 @@ SE utilizo:
 - Material UI
 - ORM (prisma)
 - MySQL
+- playwright
 
 tambien se utilizao **Bun** como gestor de paquetes y ejecutucion de desarrollo junto a **docker**
 
@@ -28,4 +29,12 @@ npx prisma migrate dev
 npm run start
 # or
 npm run dev
+```
+
+## realizar test
+```bash
+# ejecutar test
+npx playwright test 
+# para visualziar los resultados
+npx playwright show-report
 ```
